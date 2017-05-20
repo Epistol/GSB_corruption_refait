@@ -210,6 +210,9 @@ public class AddFormation extends AppCompatActivity {
         asyncGsb.execute("http://10380.sio.jbdelasalle.com/~mlebeau/GHB/index.php?uc=getTheme");
     }
 
+    private void getUserId(){
+
+    }
 
     private void ajouterFormation(){
         AsyncSoiree asyncTaskGSB = new AsyncSoiree(){
@@ -227,15 +230,9 @@ public class AddFormation extends AppCompatActivity {
                     "&dateDebut=" + datedebtu_txt.getText().toString().replace("/","-") +
                     "&dateFin=" + datefin_txt.getText().toString().replace("/","-")+
                     "&adresse=" + URLEncoder.encode(adresse.getText().toString(),"utf-8")  +
+                    "&id_user=u17"  +
                     "&nom=" + URLEncoder.encode(nom.getText().toString(),"utf-8") );
 
-            Log.wtf("FUCK", ("http://10380.sio.jbdelasalle.com/~mlebeau/GHB/index.php?uc=addFormation&theme=" + ((Theme)theme.getSelectedItem()).getIdTheme()  +
-                    "&nbPlaces=" + String.valueOf(nbPlace.getText())
-                    + "&descriptif=" + URLEncoder.encode(desc.getText().toString(),"utf-8") +
-                    "&dateDebut=" + datedebtu_txt.getText().toString().replace("/","-") +
-                    "&dateFin=" + datefin_txt.getText().toString().replace("/","-")+
-                    "&adresse=" + URLEncoder.encode(adresse.getText().toString(),"utf-8")  +
-                    "&nom=" + URLEncoder.encode(nom.getText().toString(),"utf-8") )   );
 
 
             Intent pickContactIntent = new Intent(AddFormation.this,SuiviFormationActivity.class);

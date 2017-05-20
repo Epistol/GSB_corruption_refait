@@ -98,6 +98,7 @@ public class SuiviFormationActivity extends AppCompatActivity {
         asyncGSB.execute("http://10380.sio.jbdelasalle.com/~mlebeau/GHB/index.php?uc=mesFormations");
     }
 
+    // RIEN NE POPULE LES DONNEES ... ABORT MISSION.
     private void afficherLesDonnees(final Formation formation){
         AsyncSoiree asyncGSB = new AsyncSoiree(){
             @Override

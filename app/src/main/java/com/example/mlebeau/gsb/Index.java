@@ -36,14 +36,14 @@ public class Index extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        /*
+
         searchForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(Index.this,AddFormation.class);
+                Intent intent = new Intent(Index.this,RechercherFormation.class);
                 startActivity(intent);
             }
-        });
+        }); /*
         myForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){

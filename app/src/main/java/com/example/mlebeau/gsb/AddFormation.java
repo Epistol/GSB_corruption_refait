@@ -219,7 +219,7 @@ public class AddFormation extends AppCompatActivity {
 
             }
         };
-        /////
+
         try {
             asyncTaskGSB.execute("http://10380.sio.jbdelasalle.com/~mlebeau/GHB/index.php?uc=addFormation&theme=" + ((Theme)theme.getSelectedItem()).getIdTheme()  +
                     "&nbPlaces=" + String.valueOf(nbPlace.getText())
@@ -228,6 +228,16 @@ public class AddFormation extends AppCompatActivity {
                     "&dateFin=" + datefin_txt.getText().toString().replace("/","-")+
                     "&adresse=" + URLEncoder.encode(adresse.getText().toString(),"utf-8")  +
                     "&nom=" + URLEncoder.encode(nom.getText().toString(),"utf-8") );
+
+            Log.wtf("FUCK", ("http://10380.sio.jbdelasalle.com/~mlebeau/GHB/index.php?uc=addFormation&theme=" + ((Theme)theme.getSelectedItem()).getIdTheme()  +
+                    "&nbPlaces=" + String.valueOf(nbPlace.getText())
+                    + "&descriptif=" + URLEncoder.encode(desc.getText().toString(),"utf-8") +
+                    "&dateDebut=" + datedebtu_txt.getText().toString().replace("/","-") +
+                    "&dateFin=" + datefin_txt.getText().toString().replace("/","-")+
+                    "&adresse=" + URLEncoder.encode(adresse.getText().toString(),"utf-8")  +
+                    "&nom=" + URLEncoder.encode(nom.getText().toString(),"utf-8") )   );
+
+
             Intent pickContactIntent = new Intent(AddFormation.this,SuiviFormationActivity.class);
             startActivityForResult(pickContactIntent, 1);
 

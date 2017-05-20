@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
             String idEncode = URLEncoder.encode(login, "UTF-8");
             String mdpEncode = URLEncoder.encode(mdp, "UTF-8");
 
-            asyncSoiree.execute("http://10380.sio.jbdelasalle.com/~mlebeau/GHB/index.php?uc=login&psw="+idEncode+"&login="+mdpEncode);
 
+            asyncSoiree.execute("http://10380.sio.jbdelasalle.com/~mlebeau/GHB/index.php?uc=login&psw="+idEncode+"&login="+mdpEncode);
         }
         catch (UnsupportedEncodingException e){
             e.printStackTrace();

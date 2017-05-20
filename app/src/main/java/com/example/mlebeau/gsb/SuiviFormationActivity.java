@@ -3,6 +3,7 @@ package com.example.mlebeau.gsb;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 
 public class SuiviFormationActivity extends AppCompatActivity {
 
+
+    private static final String HEY = "yo";
     private Spinner spin_formations;
     private TextView txt_nbPlaces;
     private ListView list_inscrits;
@@ -39,15 +42,14 @@ public class SuiviFormationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SuiviFormationActivity();
         setContentView(R.layout.activity_suivi_formation);
-      rechercheFormations();
-
+        SuiviFormationActivity();
+        rechercheFormations();
 
         spin_formations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                afficherDonnees((Formation)spin_formations.getSelectedItem());
+               /* afficherLesDonnees((Formation)spin_formations.getSelectedItem());*/
             }
 
             @Override
@@ -55,7 +57,7 @@ public class SuiviFormationActivity extends AppCompatActivity {
 
             }
         });
-/*
+
         btn_localisationInscrits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +65,7 @@ public class SuiviFormationActivity extends AppCompatActivity {
                 intent.putExtra("lesVisiteurs",listeVisiteurs);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 
 
@@ -73,19 +75,19 @@ public class SuiviFormationActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                /* if(!s.equals("-1")){*/
-                    ArrayList<Formation> listeFormations = new ArrayList<>();
-                    try {
-                        JSONArray jsonArray = new JSONArray(s);
-                        for (int i = 0;i <jsonArray.length();i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Formation formation = new Formation(jsonObject);
-                            listeFormations.add(formation);
-                        }
-                        spin_formations.setAdapter(new ArrayAdapter<>(SuiviFormationActivity.this, android.R.layout.simple_list_item_1, listeFormations));
-                        afficherDonnees((Formation)spin_formations.getSelectedItem());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                ArrayList<Formation> listeFormations = new ArrayList<>();
+                try {
+                    JSONArray jsonArray = new JSONArray(s);
+                    for (int i = 0;i <jsonArray.length();i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Formation formation = new Formation(jsonObject);
+                        listeFormations.add(formation);
                     }
+                    spin_formations.setAdapter(new ArrayAdapter<>(SuiviFormationActivity.this, android.R.layout.simple_list_item_1, listeFormations));
+                   /* afficherDonnees((Formation)spin_formations.getSelectedItem());*/
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 /*} else{
                     Toast.makeText(SuiviFormationActivity.this,"la session à expiré, veuillez vous reconnecter.",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SuiviFormationActivity.this,MainActivity.class);
@@ -96,7 +98,7 @@ public class SuiviFormationActivity extends AppCompatActivity {
         asyncGSB.execute("http://10380.sio.jbdelasalle.com/~mlebeau/GHB/index.php?uc=mesFormations");
     }
 
-    private void afficherDonnees(final Formation formation){
+    private void afficherLesDonnees(final Formation formation){
         AsyncSoiree asyncGSB = new AsyncSoiree(){
             @Override
             protected void onPostExecute(String s) {
@@ -114,14 +116,14 @@ public class SuiviFormationActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                } else{
+                } /*else{
                     Toast.makeText(SuiviFormationActivity.this,"la session à expiré, veuillez vous reconnecter.",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SuiviFormationActivity.this,MainActivity.class);
                     startActivity(intent);
-                }
+                }*/
             }
         };
-        asyncGSB.execute("http://10380.sio.jbdelasalle.com/~arieu/GSB/indexJson.php?uc=getInscrits&idFormation="+formation.getId());
+      /*  asyncGSB.execute("http://10380.sio.jbdelasalle.com/~mlebeau/GHB/index.php?uc=getInscrits&idFormation="+formation.getId());*/
     }
 }
 
